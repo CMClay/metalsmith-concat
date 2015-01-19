@@ -92,4 +92,25 @@ describe('metalsmith-concat', function() {
     });
   });
 
+  it('should add metadata to files passed as an Array', function(done) {
+    concat({
+      files: ['first/file', 'third/file'],
+      output: 'output/file/path',
+      metadata: {template: 'template.jade'}
+    })(files, null, function() {
+      expect(files['output/file/path'].template).to.deep.equal('template.jade');
+      done();
+    });
+  });
+
+  it('should add metadata to files', function(done) {
+    concat({
+      output: 'output/file/path',
+      metadata: {template: 'template.jade'}
+    })(files, null, function() {
+      expect(files['output/file/path'].template).to.deep.equal('template.jade');
+      done();
+    });
+  });
+
 });
